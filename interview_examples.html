@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Management Interview Examples</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-mid: #5a5a56;
+    --ink-light: #9a9a94;
+    --paper: #f7f6f2;
+    --white: #ffffff;
+    --rule: #e2e1db;
+    --accent: #3d4fd6;
+    --accent-light: #eef0fc;
+    --s: #1a6b45;
+    --s-bg: #e8f5ee;
+    --a: #3d4fd6;
+    --a-bg: #eef0fc;
+    --o: #7c3aed;
+    --o-bg: #f3eefe;
+    --warn: #92400e;
+    --warn-bg: #fef3c7;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  header {
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  header h1 {
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: .4rem;
+  }
+
+  header p {
+    font-size: .85rem;
+    color: var(--ink-light);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+
+  .legend {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .78rem;
+    color: var(--ink-mid);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .entry {
+    margin-bottom: 4rem;
+  }
+
+  .entry + .entry {
+    padding-top: 3rem;
+    border-top: .5px solid var(--rule);
+  }
+
+  .entry-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .q-number {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    flex-shrink: 0;
+  }
+
+  .company-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--ink-mid);
+    background: var(--white);
+    border: .5px solid var(--rule);
+    padding: .2rem .55rem;
+    border-radius: 3px;
+  }
+
+  .question {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    line-height: 1.55;
+  }
+
+  .story {
+    background: var(--white);
+    border: .5px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .story-block {
+    padding: 1.1rem 1.35rem;
+    border-bottom: .5px solid var(--rule);
+  }
+
+  .story-block:last-of-type {
+    border-bottom: none;
+  }
+
+  .block-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+  }
+
+  .block-label.s { color: var(--s); }
+  .block-label.a { color: var(--a); }
+  .block-label.o { color: var(--o); }
+
+  .story-block.s-block { background: var(--s-bg); }
+  .story-block.a-block { background: var(--a-bg); }
+  .story-block.o-block { background: var(--o-bg); }
+
+  .story-block p {
+    font-size: .95rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .note {
+    margin-top: 1rem;
+    padding: .75rem 1rem;
+    border-left: 2.5px solid var(--rule);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .82rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+
+  .note strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .verify-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    background: var(--warn-bg);
+    color: var(--warn);
+    border: .5px solid #fcd34d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    padding: .25rem .6rem;
+    border-radius: 3px;
+    margin-left: .5rem;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 1.5rem 1rem 4rem; }
+    .question { font-size: 1rem; }
+  }
+
+  @media print {
+    body { background: white; }
+    .entry + .entry { page-break-before: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Management interview examples</h1>
+    <p>Situation → Action → Outcome stories · Updated June 2026 · Based on Pennylane feedback</p>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--s-bg);border:1.5px solid var(--s)"></div> Situation</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--a-bg);border:1.5px solid var(--a)"></div> Action</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--o-bg);border:1.5px solid var(--o)"></div> Outcome</div>
+  </div>
+
+
+  <!-- Q1 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 1</span>
+      <span class="company-tag">Aircall · DesignOps</span>
+    </div>
+    <p class="question">"Tell me about a time you had to make the case for design's value to senior stakeholders."</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>At Aircall, design's contribution wasn't visible in leadership reviews. There was no shared language between what the design team produced and the metrics the business tracked. Stakeholders were defaulting to engineering velocity as the proxy for team health. DesignOps existed in name but had no reporting structure that connected it to outcomes.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>I built a three-layer metrics framework — business metrics we could influence (activation flows, feature adoption), UX quality signals we instrumented ourselves (task completion rates, CSAT on key interactions), and qualitative data from structured user interviews. I then ran a cross-functional session with the product lead and a couple of PMs to map which design decisions over the previous two quarters had influenced each metric, working backwards. I also introduced the Theming work into this narrative directly: when we shipped the Theming section to the design system's documentation, the number of developer support requests related to colour token implementation dropped measurably — I used that as a concrete example of design work reducing operational cost, not just improving quality.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>Design was included in quarterly planning for the following cycle. The Theming example specifically landed — it translated something abstract (documentation quality) into something finance-legible (reduced support load). It shifted the conversation from design asking for trust to design providing evidence.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> Lead with the Theming/support ticket example early — it's the most concrete moment here. Don't bury it at the end of the action. The principle (three-layer metrics framework) should emerge at the end, not be stated at the start.</p>
+  </div>
+
+
+  <!-- Q2 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 2</span>
+      <span class="company-tag">Zeroheight</span>
+    </div>
+    <p class="question">"How have you developed your designers — can you give a specific example?"</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>One of my senior designers at Zeroheight was producing solid execution work but staying close to briefs — not pushing back on scope, not advocating for users in cross-functional discussions. Peer feedback confirmed it: strong craft, limited strategic voice. The gap wasn't skill, it was confidence in the room.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>Rather than giving abstract feedback about "being more strategic," I gave them a concrete brief: own the research synthesis for one project and present the insights directly to the PM — without me in the room. We ran a prep session beforehand where I challenged every slide with "so what does this mean for the roadmap?" until they were comfortable connecting data to decisions. I also shifted my 1:1 format: less status updates, more questions like "what would you do differently if you were the PM here?" The goal was to get them thinking from a product perspective habitually, not just when asked.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>By the next quarterly cycle they were contributing directly to sprint planning. The PM mentioned in a cross-functional retro that design input had become more useful because it came with a point of view, not just options. That's the shift I was after — from design as a delivery function to design as a thinking partner.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> Don't open with "I believe in giving designers autonomy" — that's exactly what Pennylane flagged as too theoretical. Start with the specific observation ("staying close to briefs, not pushing back") and let the principle surface at the end if you want it.</p>
+  </div>
+
+
+  <!-- Q3 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 3</span>
+      <span class="company-tag">Zeroheight</span>
+    </div>
+    <p class="question">"How do you make sure research actually influences product decisions, rather than just sitting in a deck?"</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>When I arrived at Zeroheight, research was happening — but insights were delivered as reports after decisions had already been shaped. The roadmap was effectively set by engineering feasibility and PM intuition, with research used to validate after the fact rather than to inform upstream.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>I introduced two structural changes. First, we started documenting PM and leadership assumptions before research kicked off — written down, dated. This made it harder to dismiss inconvenient findings later ("we already knew that") because we had a record of what people actually believed going in. Second, I pushed for cross-functional synthesis sessions where PMs and engineers sat in — not just designers. The point was that insights stick differently when you've heard users directly rather than reading a filtered summary. People anchor to stories, not slides.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>Two roadmap decisions in one quarter were directly revisited based on research findings. One feature was deprioritised because research showed the pain it solved wasn't where users actually dropped off. The other was a component documentation gap that got moved up the roadmap once we'd seen — in a synthesis session — how often users were reaching for workarounds. Neither of those conversations would have happened if research had just landed as a PDF.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> The "document assumptions before you start" move is a strong, specific practice interviewers don't often hear. Lead with it. It signals methodological rigour without sounding theoretical.</p>
+  </div>
+
+
+  <!-- Q4 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 4</span>
+      <span class="company-tag">Zeroheight · Rebrand</span>
+    </div>
+    <p class="question">"Tell me about a time you shaped product strategy, not just product design."</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>The Zeroheight rebrand started as a visual exercise. But the deeper problem it exposed was that our information architecture no longer matched how users actually thought about design systems work. Our ICP had shifted — we were seeing significantly more developer and wider product team traffic alongside the design audience we'd originally built for. The nav model was built for a pure design audience and wasn't serving that broader set of users. A cosmetic refresh would have papered over a structural problem.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>I reframed the scope to leadership using a future-state experience vision — screens showing what the product could look like once the IA had been rearchitected for the broader ICP, not just reskinned. I mapped the gap between the existing navigation model and the proposed one, with research from user interviews showing where developers and product managers got lost. Then I ran a prioritisation session with the CEO and product lead to size what could be tackled inside the rebrand window and what would need a separate track. The visual artefacts did the persuasive work — it's harder to dismiss a concrete picture of the future than an argument about it.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>The rebrand expanded to include an IA overhaul alongside the visual work. Engineering committed two sprints specifically to run user tests and validate the new navigation model before it shipped — which was the right call, and wouldn't have happened without that upfront alignment on scope. That engineering commitment was the concrete signal that the strategic case had landed, not just the design case.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> Be ready for the follow-up "what did the user tests find?" Know the answer before you use this story. The two-sprint engineering commitment is a specific, credible detail — use it, but only if you can speak to what those sprints produced.</p>
+  </div>
+
+
+  <!-- Q5 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 5</span>
+      <span class="company-tag">Botify</span>
+    </div>
+    <p class="question">"How do you handle a situation where a PM or engineer pushes back on a design decision?"</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>At Botify, the navigation redesign project surfaced a real disagreement. The PM wanted to retain a prominent module because usage data showed it was heavily accessed. The design team's research told a different story: it was accessed heavily because it was the primary visible path to a task — not because users found it valuable or intuitive. Users were working around the architecture, not using it. Removing it was the right call structurally, but the PM's read of the data wasn't wrong, just incomplete.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>Rather than arguing from design principles, I reframed the disagreement as a testable question: "users access this because it's their only visible route, not because they prefer it." I proposed a targeted test — structured sessions with existing users navigating the redesigned flows without the module — rather than asking for a full build commitment. That turned the debate from competing opinions into a shared question we could answer. The PM agreed because it was low cost and resolved the impasse empirically rather than politically.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>The test validated the design team's hypothesis. Users navigated the new structure confidently once the module's visual dominance wasn't pulling them into a dead-end flow. The module was removed in the shipped version. More usefully, the process established a pattern for the team: when design and product disagree on a behavioural question, the answer is usually a small test, not a longer argument.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> This story is drawn from the Botify navigation case study — the project covered competitive analysis, user surveys, and IA redesign for Botify's multi-application suite. Verify the specific detail of the module and test before using. The structure of the story (reframe as testable question → propose cheap test → resolve empirically) is solid and transferable to any version of this experience.</p>
+  </div>
+
+
+  <!-- Q6 -->
+  <div class="entry">
+    <div class="entry-meta">
+      <span class="q-number">Question 6</span>
+      <span class="company-tag">Zeroheight · Aircall</span>
+    </div>
+    <p class="question">"How do you build and maintain design culture on a small team?"</p>
+    <div class="story">
+      <div class="story-block s-block">
+        <div class="block-label s">Situation</div>
+        <p>At Zeroheight I was managing three product designers and a brand designer. Each person was embedded in their squad — which is efficient but erodes shared craft standards and cross-pollination over time. People were producing good work individually but weren't learning from each other. At Aircall I'd seen the same pattern, which is partly why I'd formalised a DesignOps structure there: ways of working don't self-maintain.</p>
+      </div>
+      <div class="story-block a-block">
+        <div class="block-label a">Action</div>
+        <p>I introduced a lightweight critique rhythm — not to approve work, but to share early thinking. The explicit rule was: come with something half-baked, the goal is questions not judgements. That lowered the bar for sharing and made the sessions useful rather than performative. I also built a lean ways-of-working playbook that codified things like how we handed work to engineering, how we documented decisions, and what "ready for build" meant. It gave the team shared vocabulary without creating bureaucracy. When I left Zeroheight, the handover document I prepared for the team was structured around those norms specifically — not just project status — so that the culture would persist rather than dissolve.</p>
+      </div>
+      <div class="story-block o-block">
+        <div class="block-label o">Outcome</div>
+        <p>Engineering handoff complaints dropped. More tellingly, the designers started referencing each other's decisions in their own work — which is the signal that a coherent culture exists rather than parallel tracks. The DesignOps playbook at Aircall went into Confluence and was actively used by the team after I left. Both cases showed me that culture at this scale is mostly about rituals and artefacts, not values statements.</p>
+      </div>
+    </div>
+    <p class="note"><strong>Delivery note:</strong> The handover document is recent, concrete, and signals deliberate management thinking. Mention it. The line "culture is mostly about rituals and artefacts, not values statements" is a strong closing beat — use it if the tone of the interview warrants it.</p>
+  </div>
+
+</div>
+</body>
+</html>
