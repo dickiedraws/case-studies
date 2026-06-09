@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richard — DesignOps & Figma Governance — Aircall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F8F7;
+    --bg-card: #EEEEE9;  /* slightly warm card bg */
+    --ink: #0D1F1A;
+    --ink-muted: #5A6B64;
+    --ink-light: #9AADA6;
+    --accent: #00B388;
+    --accent-dark: #007F62;
+    --accent-pale: #EAF0EE;
+    --rule: #D4DDD9;
+    --white: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 0 44px; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+
+  .doc-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .doc-index {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; color: var(--ink-light);
+  }
+
+  .cover-body { padding-top: 80px; }
+
+  .cover-eyebrow {
+    display: inline-flex; align-items: center;
+    gap: 8px; margin-bottom: 28px;
+  }
+  .eyebrow-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); flex-shrink: 0;
+  }
+  .eyebrow-text {
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.08; letter-spacing: -0.02em;
+    color: var(--ink); max-width: 700px; margin-bottom: 32px;
+  }
+
+  .cover-subtitle {
+    font-size: 17px; font-weight: 300;
+    color: var(--ink-muted); max-width: 520px; line-height: 1.65;
+  }
+
+  .cover-meta { display: flex; gap: 48px; padding-top: 64px; flex-wrap: wrap; }
+  .meta-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 4px;
+  }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--ink); }
+
+  .cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .cover-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .cover-name span { color: var(--ink-muted); font-weight: 400; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex; align-items: center;
+    gap: 16px; margin-bottom: 48px;
+  }
+  .section-tag {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); background: var(--ink);
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .section-tag.accent { background: var(--accent); }
+  .section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.15; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 20px;
+  }
+  .section-lead {
+    font-size: 16px; font-weight: 300;
+    color: var(--ink-muted); max-width: 640px;
+    line-height: 1.7; margin-bottom: 40px;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 12px;
+    overflow: hidden; margin-bottom: 48px;
+  }
+  .stat-cell { background: var(--bg-card); padding: 28px 28px 24px; }
+  .stat-number {
+    font-family: var(--font-display); font-size: 42px;
+    line-height: 1; color: var(--ink); margin-bottom: 8px;
+  }
+  .stat-number .accent-num { color: var(--accent); }
+  .stat-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
+
+  /* ── BODY COPY ── */
+  .body-copy { font-size: 15px; line-height: 1.75; color: var(--ink); max-width: 680px; }
+  .body-copy p { margin-bottom: 20px; }
+  .body-copy p:last-child { margin-bottom: 0; }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px; background: var(--accent-pale);
+    border-radius: 0 10px 10px 0; margin: 40px 0;
+  }
+  .callout-text {
+    font-family: var(--font-display); font-size: 20px;
+    line-height: 1.45; font-style: italic; color: var(--ink);
+  }
+
+  /* ── PILLARS ── */
+  .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 32px; margin-bottom: 40px;
+  }
+  .pillar {
+    background: var(--bg-card); border-radius: 12px;
+    padding: 28px 24px; border: 1px solid var(--rule);
+  }
+  .pillar-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 8px;
+  }
+  .pillar-name {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .pillar-title {
+    font-family: var(--font-display); font-size: 20px;
+    line-height: 1.2; color: var(--ink); margin-bottom: 10px;
+  }
+  .pillar-desc { font-size: 13px; line-height: 1.6; color: var(--ink-muted); }
+
+  /* ── INITIATIVE LIST ── */
+  .initiative-list { display: flex; flex-direction: column; margin-top: 8px; }
+  .initiative {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 32px; padding: 24px 0;
+    border-bottom: 1px solid var(--rule); align-items: start;
+  }
+  .initiative:last-child { border-bottom: none; }
+  .initiative-label {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-muted); padding-top: 3px;
+  }
+  .initiative-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .initiative-desc { font-size: 14px; line-height: 1.65; color: var(--ink-muted); }
+
+  /* ── CHIPS ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    font-size: 12px; font-weight: 500;
+    color: var(--accent); background: var(--accent-pale);
+    border: 1px solid rgba(0, 100, 75, 0.2);
+    padding: 4px 12px; border-radius: 100px;
+  }
+
+  /* ── TWO COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .card {
+    background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 12px; padding: 28px 24px;
+  }
+  .card-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-light); margin-bottom: 12px;
+  }
+  .card-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+  .card-body { font-size: 13px; line-height: 1.65; color: var(--ink-muted); }
+
+  /* ── ROADMAP TIMELINE ── */
+  .roadmap {
+    margin: 36px 0;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .roadmap-header {
+    display: grid;
+    grid-template-columns: 100px repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+  }
+  .roadmap-header-cell {
+    background: var(--ink);
+    color: var(--white);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 12px 16px; text-align: center;
+  }
+  .roadmap-header-cell.empty { background: var(--bg-card); }
+  .roadmap-row {
+    display: grid;
+    grid-template-columns: 100px repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+  }
+  .roadmap-band {
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 10px;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    writing-mode: vertical-lr; transform: rotate(180deg);
+    color: var(--white); text-align: center;
+  }
+  .band-together { background: #E84855; }
+  .band-done { background: #3B5BDB; }
+  .band-impact { background: var(--accent); }
+  .roadmap-cell {
+    background: var(--bg-card);
+    padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .roadmap-item {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px; font-weight: 500; color: var(--ink);
+    text-align: center;
+  }
+  .roadmap-item.done {
+    background: var(--accent-pale);
+    border-color: rgba(0,179,136,0.3);
+    color: var(--accent-dark);
+  }
+
+  /* ── PHASE PIPELINE ── */
+  .pipeline {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--rule);
+    border: 1px solid var(--rule); border-radius: 12px;
+    overflow: hidden; margin: 36px 0;
+  }
+  .phase { padding: 24px 20px; background: var(--bg-card); border-right: 1px solid var(--rule); }
+  .phase:last-child { border-right: none; }
+  .phase-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .phase-desc { font-size: 12px; line-height: 1.5; color: var(--ink-muted); }
+
+  /* ── SLIDE EMBED ── */
+  .slide-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin: 32px 0;
+  }
+  .slide-frame {
+    border-radius: 10px; overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .slide-frame img {
+    width: 100%; display: block;
+    aspect-ratio: 16/9; object-fit: cover; object-position: top;
+  }
+  .slide-caption {
+    font-size: 11px; color: var(--ink-light);
+    padding: 9px 12px; background: var(--bg-card);
+    border-top: 1px solid var(--rule); line-height: 1.4;
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    padding: 40px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+  .footer-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .footer-doc { font-size: 12px; color: var(--ink-light); letter-spacing: 0.04em; }
+
+  @media print {
+    body { background: white; }
+    .cover { min-height: auto; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+  }
+  @media (max-width: 620px) {
+    .page { padding: 0 20px; }
+    .stat-bar, .pillars, .two-col, .slide-row { grid-template-columns: 1fr; }
+    .initiative { grid-template-columns: 1fr; gap: 8px; }
+    .roadmap-header, .roadmap-row { grid-template-columns: 60px repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <span class="doc-label">Case Study — DesignOps</span>
+      <span class="doc-index">Aircall · 2022</span>
+    </div>
+    <div class="cover-body">
+      <div class="cover-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">Aircall · Paris</span>
+      </div>
+      <h1 class="cover-title">DesignOps &amp; Figma Governance</h1>
+      <p class="cover-subtitle">Introducing a formal DesignOps programme at Aircall — building the operational foundations for a multi-team product design organisation to work with clarity, consistency, and craft.</p>
+      <div class="cover-meta">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Senior Product Designer</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Scope</div>
+          <div class="meta-value">DesignOps · Tractor Design System · Figma Governance</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Output</div>
+          <div class="meta-value">Programme + Playbook + Epilogue</div>
+        </div>
+      </div>
+    </div>
+    <div class="cover-bottom">
+      <div class="cover-name">Richard <span>— Product Design Lead</span></div>
+      <div class="doc-label">DesignOps &amp; Figma Governance</div>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Context</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">A growing product team without operational foundations</h2>
+    <p class="section-lead">Aircall is a cloud-based communications platform serving sales and support teams worldwide. By 2022, the product design organisation had grown across multiple experience squads — but without a shared operating model to match.</p>
+
+    <div class="stat-bar">
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">7</span></div>
+        <div class="stat-desc">DesignOps pillars identified and roadmapped across a four-quarter programme</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">5</span></div>
+        <div class="stat-desc">experience teams within Figma — Agent, Admin, Integrations, Aircallee, Reseller — each requiring consistent governance</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">24</span></div>
+        <div class="stat-desc">slides in the Figma Playbook, covering tooling roles, file structure, branching, review and handoff standards</div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>Designers across squads were making independent decisions about file structure, handoff, tooling, and process — leading to inconsistencies that slowed collaboration and made onboarding new team members harder than it needed to be. The design system (Tractor) existed but lacked the documentation and contribution infrastructure to be used reliably across teams.</p>
+      <p>In March 2022 I led the creation of a formal DesignOps programme — framed as a presentation to the team, with a roadmap across four quarters, and followed four months later by an Epilogue documenting what had been delivered. I also wrote the Figma Playbook: a comprehensive guide to how Aircall's product design team used Figma across every level of the tooling stack.</p>
+    </div>
+  </div>
+
+  <!-- WHAT IS DESIGNOPS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Framework</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">Defining DesignOps for the team — and making the case for it</h2>
+    <p class="section-lead">Before building anything, I needed to establish a shared understanding of what DesignOps was and why it mattered. The team were designers, not ops practitioners — the framing had to be practical and grounded in their day-to-day frustrations.</p>
+
+    <div class="callout">
+      <p class="callout-text">"DesignOps refers to the orchestration and optimization of people, processes, and craft in order to amplify design's value and impact at scale." — Nielsen Norman Group</p>
+    </div>
+
+    <div class="body-copy">
+      <p>I structured the programme around the idea of working on the 'how' — not the design work itself, but the conditions under which that work happened. The seven pillars spanned three categories: things the team needed to do together (Together), things that enabled individual designers to work well (Done), and things that would create lasting impact on the business and product quality (Impact).</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-label">Work Together</div>
+        <div class="pillar-name">Onboarding</div>
+        <div class="pillar-title">Design Welcome Kit</div>
+        <div class="pillar-desc">Ways of working, role context, toolkit setup, and documentation to get new designers productive from day one.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Together</div>
+        <div class="pillar-name">Handoff</div>
+        <div class="pillar-title">Design-to-Dev Package</div>
+        <div class="pillar-desc">Standardised handoff including ticket links, design flow, and component inventory — reducing inconsistency between squads.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Together</div>
+        <div class="pillar-name">Tooling Infrastructure</div>
+        <div class="pillar-title">File & Project Standards</div>
+        <div class="pillar-desc">Defined guidelines for file creation, project structure, branching, design reviews, and documentation of changes.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Together</div>
+        <div class="pillar-name">Design Rituals</div>
+        <div class="pillar-title">Weekly, Contextual &amp; Quarterly</div>
+        <div class="pillar-desc">Design Weekly, Pit-stop critiques, Project Presentations, Retrospectives, and Brand &amp; Product Story sessions — all clarified and made accessible.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Done</div>
+        <div class="pillar-name">Testing Tools</div>
+        <div class="pillar-title">Research Tooling</div>
+        <div class="pillar-desc">Assigned design research tools to the team, with guidance on when and how to use them across testing phases.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Done</div>
+        <div class="pillar-name">Workload &amp; Time</div>
+        <div class="pillar-title">Tracking &amp; Allocation</div>
+        <div class="pillar-desc">JIRA-based workload visibility for leads and PMs, plus Toggl time-tracking across defined categories: Design, Handoff, Research, Ritual, Discovery.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-label">Work Impact</div>
+        <div class="pillar-name">Design System</div>
+        <div class="pillar-title">Tractor — Maturity &amp; Contribution</div>
+        <div class="pillar-desc">Scalable component library with contribution system, design tokens, UX Writing guidelines, accessibility standards, and documentation for designers and developers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Roadmap</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">A four-quarter rollout — phased, sequenced, and transparent</h2>
+    <p class="section-lead">Each pillar was assigned a delivery quarter. Presenting the roadmap to the team made the programme visible and accountable — designers could see what was coming, and leadership could track progress against a stated plan.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-header">
+        <div class="roadmap-header-cell empty"></div>
+        <div class="roadmap-header-cell">Q1</div>
+        <div class="roadmap-header-cell">Q2</div>
+        <div class="roadmap-header-cell">Q3</div>
+        <div class="roadmap-header-cell">Q4</div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-band band-together">Work Together</div>
+        <div class="roadmap-cell">
+          <div class="roadmap-item done">Design Rituals</div>
+        </div>
+        <div class="roadmap-cell"></div>
+        <div class="roadmap-cell">
+          <div class="roadmap-item done">Tooling Infrastructure</div>
+        </div>
+        <div class="roadmap-cell">
+          <div class="roadmap-item done">Design Onboarding</div>
+          <div class="roadmap-item done">Design Handoff</div>
+        </div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-band band-done">Work Done</div>
+        <div class="roadmap-cell"></div>
+        <div class="roadmap-cell">
+          <div class="roadmap-item done">Time Tracking</div>
+          <div class="roadmap-item done">Workload Allocation</div>
+        </div>
+        <div class="roadmap-cell"></div>
+        <div class="roadmap-cell"></div>
+      </div>
+      <div class="roadmap-row">
+        <div class="roadmap-band band-impact">Work Impact</div>
+        <div class="roadmap-cell" style="grid-column: span 4; background: var(--accent-pale);">
+          <div class="roadmap-item done" style="max-width: 260px;">Design System — Tractor (ongoing)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>The roadmap made it clear that this wasn't a single project — it was a sustained programme. Design rituals came first because they required the least infrastructure to change and would immediately improve team culture. The design system ran as a continuous thread throughout, given its foundational nature. Onboarding and handoff were deferred to Q3–Q4 to give earlier pillars time to bed in first.</p>
+    </div>
+  </div>
+
+  <!-- EPILOGUE: WHAT WAS DELIVERED -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Delivery</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">Four months later — what actually shipped</h2>
+    <p class="section-lead">The Epilogue presentation, delivered in July 2022, was a structured retrospective on what had been built since March. Five of the seven pillars had seen significant improvement.</p>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">Confluence &amp; Docs</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Dedicated spaces for DesignOps and ResearchOps</div>
+          <div class="initiative-desc">Created structured Confluence environments for DesignOps and ResearchOps — reducing documentation complexity, making information discoverable, and laying the groundwork for a cleaner design onboarding experience.</div>
+          <div class="chips">
+            <span class="chip">DesignOps space</span>
+            <span class="chip">ResearchOps space</span>
+            <span class="chip">Simplified structure</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Design Rituals</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Clarified, documented, and expanded</div>
+          <div class="initiative-desc">Existing rituals were rewritten with clear purpose statements and made accessible to all Aircallees. Two new sessions were introduced: Feedback Sessions for rapid iteration input, and UX Sparks — protected creative time within each experience team.</div>
+          <div class="chips">
+            <span class="chip">Feedback Sessions</span>
+            <span class="chip">UX Sparks</span>
+            <span class="chip">Ritual documentation</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Tooling Infrastructure</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Figma restructured around experience teams</div>
+          <div class="initiative-desc">Mirrored the global team structure in Figma — with dedicated spaces per experience team — simplifying file navigation, clarifying ownership, and making it faster for designers to locate and contribute to the right projects.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Tractor Design System</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Tokens, documentation, and Figma library management</div>
+          <div class="initiative-desc">Introduced colour token logic as the foundation for better theming across design and development. Created a cleaner Figma library management system, improved Tractor documentation for both designers and developers, and identified a dedicated documentation home — giving the system the infrastructure to be used consistently at scale.</div>
+          <div class="chips">
+            <span class="chip">Colour tokens</span>
+            <span class="chip">Theme foundation</span>
+            <span class="chip">Library management</span>
+            <span class="chip">Developer documentation</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Time Tracking</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Design time vs meeting time — made visible</div>
+          <div class="initiative-desc">Rolled out Toggl tracking across five categories — Design, Handoff, UX Research, Ritual, Discovery. The primary goal was visibility: understanding where designers were losing time to non-design work, and using that data to protect the right kind of focus.</div>
+          <div class="chips">
+            <span class="chip">Toggl integration</span>
+            <span class="chip">5 tracking categories</span>
+            <span class="chip">Design vs meeting time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGMA PLAYBOOK -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Figma Playbook</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">A 24-slide governance guide for every designer and collaborator at Aircall</h2>
+    <p class="section-lead">The Figma Playbook was written to give anyone touching Aircall's design files — from junior designers to PMs and developers — a clear, consistent understanding of how the tool was structured and how to navigate it responsibly.</p>
+
+    <div class="body-copy">
+      <p>The playbook covered the full stack: from role-based permissions (Owner, Editor, Viewer, Guest) and the rationale behind access control, through to file creation standards, page naming conventions, branch and review workflows, prototyping practices, and developer inspect guidance for handoff.</p>
+      <p>The experience team structure — Agent, Admin, Integrations, Aircallee, Reseller, Brand, Marketing, DesignOps — was mapped directly into Figma's team and project hierarchy, so the tooling reflected how the organisation actually worked.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-label">Access & Permissions</div>
+        <div class="card-title">Four roles, clearly defined</div>
+        <div class="card-body">Owner/Admin, Editor, Viewer, and Guest — each with explicit permissions for viewing, commenting, editing, and library access. Designers held full editor access; collaborators like PMs and developers were set as Viewers. Reduced accidental overwrites and protected work in progress.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">File Architecture</div>
+        <div class="card-title">Teams → Projects → Files → Pages</div>
+        <div class="card-body">A four-level hierarchy matching the team structure. Each experience team had its own Figma team space with dedicated projects per product area. Files were broken down by platform (Desktop, iOS, Android) and each contained a cover page for quick identification.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Branches & Reviews</div>
+        <div class="card-title">Design version control</div>
+        <div class="card-body">Branches allowed designers to explore changes without touching source files. Naming conventions were defined, review workflows documented, and the merge-or-archive decision clarified — following development version control logic to reduce file bloat and protect the source of truth.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Handoff & Inspect</div>
+        <div class="card-title">Developer-ready delivery standards</div>
+        <div class="card-body">Developers could access spacing, padding and measurements via the Inspect panel. Prototype flows were named and described to assist external reviewers — PMs, developers, and user testers — with clear signposting at every stage of the handoff.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Reflection</span>
+      <div class="section-rule"></div>
+    </div>
+    <h2 class="section-title">What this work produced beyond the deliverables</h2>
+    <div class="body-copy">
+      <p>DesignOps work at this scale — building from scratch within an existing organisation — requires a particular kind of political intelligence alongside the craft. You're introducing structure that some people will experience as constraint. The framing matters: this wasn't presented as a set of rules, but as infrastructure the team had asked for, built to make their own work less frustrating.</p>
+      <p>The Epilogue was as important as the original presentation. Returning four months later with a transparent account of what had been built, what was still in progress, and what had changed in scope demonstrated that this was a real programme with accountability — not a slide deck that got filed away. It also gave the team a moment to see how much had actually moved in a short time.</p>
+      <p>The Figma Playbook outlasted my tenure at Aircall as a living reference document. Writing it forced a level of clarity about tooling decisions that was useful for the team beyond its immediate purpose — it became part of the design onboarding kit that the DesignOps programme was itself trying to build.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-name">Richard — DesignOps Lead · Aircall 2022</div>
+    <div class="footer-doc">Case Study — DesignOps &amp; Figma Governance</div>
+  </div>
+
+</div>
+</body>
+</html>

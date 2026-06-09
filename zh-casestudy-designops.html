@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richard — Head of Design: DesignOps & Craft — zeroheight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F6F0;
+    --bg-card: #F0EBE1;
+    --bg-dark: #1A1A1A;
+    --ink: #1A1A1A;
+    --ink-muted: #6B6B6B;
+    --ink-light: #9B9B9B;
+    --accent: #ff4852;
+    --accent-pale: #F8F6F0;
+    --rule: #D8D1C4;
+    --white: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .doc-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .doc-index {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+  }
+
+  .cover-body { padding-top: 80px; }
+
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .eyebrow-text {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 520px;
+    line-height: 1.65;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    padding-top: 64px;
+  }
+
+  .meta-item {}
+  .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .cover-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .cover-name span {
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .section-tag.accent { background: var(--accent); }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .section-lead {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .stat-cell {
+    background: var(--bg-card);
+    padding: 28px 28px 24px;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .stat-number .accent-num { color: var(--accent); }
+
+  .stat-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .body-copy {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 680px;
+  }
+
+  .body-copy p { margin-bottom: 20px; }
+  .body-copy p:last-child { margin-bottom: 0; }
+
+  /* ── PHASE PIPELINE ── */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .phase {
+    padding: 24px 18px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .phase:last-child { border-right: none; }
+
+  .phase-number {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .phase-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .phase-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+  }
+
+  .phase.highlight { background: var(--bg-card); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border-radius: 0 10px 10px 0;
+    margin: 40px 0;
+  }
+
+  .callout-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* ── INITIATIVE LIST ── */
+  .initiative-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  .initiative {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .initiative:last-child { border-bottom: none; }
+
+  .initiative-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-top: 3px;
+  }
+
+  .initiative-body {}
+
+  .initiative-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .initiative-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+  }
+
+  /* ── CHIPS ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .chip {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 72, 82, 0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* ── TWO-COL GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px 24px;
+  }
+
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+  }
+
+  /* ── DS OBJECTIVES TABLE ── */
+  .obj-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 14px;
+  }
+
+  .obj-table thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .obj-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding: 0 0 12px;
+  }
+
+  .obj-table th:not(:first-child) { padding-left: 24px; }
+
+  .obj-table td {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .obj-table td:not(:first-child) { padding-left: 24px; }
+
+  .obj-table td.owner {
+    font-size: 13px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+
+  .obj-table tr:last-child td { border-bottom: none; }
+
+  .tag-sm {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: var(--bg-card);
+    color: var(--accent);
+    border: 1px solid rgba(255, 72, 82, 0.2);
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .footer-doc {
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── PRINT ── */
+  /* ── IMPACT GRID ── */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 36px 0;
+    font-size: 13px;
+  }
+  .ig-corner { background: var(--bg); }
+  .ig-header {
+    background: var(--ink);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    text-align: center;
+  }
+  .ig-header.save { background: var(--bg-dark); }
+  .ig-header.make { background: var(--accent); }
+  .ig-row-label {
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+  .ig-cell { background: var(--bg-card); padding: 16px 18px; vertical-align: top; }
+  .ig-lever { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+  .ig-lever:last-child { margin-bottom: 0; }
+  .ig-lever-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+  .ig-lever-dot.muted { background: var(--rule); }
+  .ig-lever-name { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .ig-lever-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+
+  @media print {
+    body { background: white; }
+    .cover { min-height: auto; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .pipeline, .two-col, .stat-bar { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 620px) {
+    .page { padding: 0 20px; }
+    .stat-bar { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .initiative { grid-template-columns: 1fr; gap: 8px; }
+    .cover-meta { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <span class="doc-label">Case Study — Head of Design</span>
+      <span class="doc-index">02 / 02</span>
+    </div>
+
+    <div class="cover-body">
+      <div class="cover-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">zeroheight · 2022–2025</span>
+      </div>
+      <h1 class="cover-title">DesignOps &amp; Craft</h1>
+      <p class="cover-subtitle">Creating the operational conditions for design to do its best work — from the processes that governed how work flowed, to the standards that defined what good looked like.</p>
+      <div class="cover-meta">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Head of Design</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">System</div>
+          <div class="meta-value">Flapjack Design System</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Focus</div>
+          <div class="meta-value">Ops · Process · Quality</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-name">Richard <span>— Product Design Lead</span></div>
+      <div class="doc-label">DesignOps &amp; Craft</div>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Context</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Good design needs good conditions to happen in</h2>
+    <p class="section-lead">Process isn't the opposite of creativity — it's what lets it scale. When I joined, the team had talent but not the infrastructure to apply it consistently or sustainably.</p>
+
+    <div class="stat-bar">
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">5</span></div>
+        <div class="stat-desc">distinct work phases introduced across the design workflow — Discovery through to DIMP post-release</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">3</span></div>
+        <div class="stat-desc">DIMP days per designer per month protected for design-led quality improvements and system work</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">7</span></div>
+        <div class="stat-desc">SMART goals developed for the team in Q4 2024 alone, spanning tooling, research, critique and system collaboration</div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>The operational gaps were predictable: work starting before requirements were clear, no shared understanding of what "done" looked like at each stage, research findings that went undiscovered, and a design system that was hard to contribute to. None of these were the team's fault — they were process failures, and they were mine to fix.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN WORKFLOW -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Design Workflow</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">A five-phase workflow that the whole product org could follow</h2>
+    <p class="section-lead">I introduced a structured phase model to make design progress visible across teams and give designers a clear sense of what was expected at each point in a project.</p>
+
+    <div class="pipeline">
+      <div class="phase">
+        <div class="phase-number">Phase 01</div>
+        <div class="phase-name">Discovery</div>
+        <div class="phase-desc">Problem definition, user research, context gathering before design starts.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">Phase 02</div>
+        <div class="phase-name">Pre-Production</div>
+        <div class="phase-desc">Brief finalised. Deadlines, polish level and success criteria agreed.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">Phase 03</div>
+        <div class="phase-name">Building</div>
+        <div class="phase-desc">Active design — explorations, iterations, critique and sign-off.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-number">Phase 04</div>
+        <div class="phase-name">Shipping</div>
+        <div class="phase-desc">Handoff to engineering, QA, and release coordination.</div>
+      </div>
+      <div class="phase highlight">
+        <div class="phase-number">Phase 05</div>
+        <div class="phase-name">DIMP</div>
+        <div class="phase-desc">Design-led improvements to released work — quality, accessibility, system.</div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>The fifth phase — DIMP (Design-led Improvement) — was deliberately separate from the feature roadmap. It gave designers protected time after shipping to improve what had already been released: tightening accessibility, updating Flapjack components, addressing visual inconsistencies that had been deferred under time pressure. Three days per designer per month were allocated to DIMP work.</p>
+      <p>I had to define clearly what DIMP was and wasn't. It wasn't a UX bug tracker, a support backlog, or a vehicle for new features. It was a mechanism for design-led quality, and treating it as such protected it from being colonised by other teams' priorities.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN BRIEFS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Requirements</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">A design brief template that clarified before work started</h2>
+    <p class="section-lead">A significant amount of rework traced back to misaligned expectations at the start of a project. The brief template was a direct intervention on that.</p>
+
+    <div class="callout">
+      <p class="callout-text">"Designers shouldn't have to infer what 'done' looks like. If expectations around deadline, polish level and success criteria aren't explicit before work starts, they'll be contested when work ends."</p>
+    </div>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">What it captured</div>
+        <div class="initiative-body">
+          <div class="initiative-desc">The problem being solved, project requirements, delivery expectations, deadline, required level of polish (exploratory sketch vs final UI), measures of success, dependencies and key stakeholders — all agreed before design began.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Why it mattered</div>
+        <div class="initiative-body">
+          <div class="initiative-desc">The template gave designers something to push back with. If a PM wanted a fully polished UI in two days for an exploratory brief, the form made that tension visible — and created a constructive way to negotiate scope before effort was invested.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Connected to</div>
+        <div class="initiative-body">
+          <div class="chips">
+            <span class="chip">Pre-Production phase gate</span>
+            <span class="chip">Workload tracking tooling</span>
+            <span class="chip">Design critique process</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Design System</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Raising Flapjack's maturity — and the team's relationship to it</h2>
+    <p class="section-lead">Flapjack was the internal name for zeroheight's own design system. As the company that sells design system tooling to others, the bar for internal maturity was unusually high.</p>
+
+    <div class="body-copy">
+      <p>When I joined, contribution to Flapjack was informal and inconsistently applied. Designers weren't sure how to propose changes, engineers weren't sure when to expect design decisions, and the reporting on system adoption was minimal. I approached this as an operations problem as much as a craft problem.</p>
+      <p>There was also an obvious obligation — and opportunity — that came with the context. We were a company selling design system tooling to teams who wanted exactly what we were trying to build internally. So we used zeroheight itself as the single source of truth for Flapjack: documenting components, tracking their status, publishing release notes, and making everything accessible to the whole product team in one place. Eating our own dog food wasn't just a principle — it was the most credible signal we could send to customers, and a genuine test of whether the product held up under real-world pressure.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-label">Contribution System</div>
+        <div class="card-title">How changes enter the system</div>
+        <div class="card-body">Documented how contributions should be proposed, reviewed, designed, built and released — creating a clear path from "this doesn't feel right" to "this is now the standard", without all decisions needing to route through a single gatekeeper.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Collaboration Model</div>
+        <div class="card-title">Three stages: Creating, Updating, Reporting</div>
+        <div class="card-body">Identified the three design-engineering collaboration points that most often produced friction or silence, and designed a working model around each: clearer handoffs when creating new components, a structured update process, and regular reporting on system health and adoption.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Token & Component Work</div>
+        <div class="card-title">Q2 2025 objectives</div>
+        <div class="card-body">Led a focused quarter of system improvements: colour tokens, typography tokens, iconography, visual assets within the product, modal patterns, and error UI patterns — each with a named owner and a defined scope.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Figma Governance</div>
+        <div class="card-title">Library permissions and organisation</div>
+        <div class="card-body">Clarified Figma library structure, permissions and team access — reducing friction for designers working across product areas and making it easier for new starters to navigate the system.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Dogfooding</div>
+        <div class="card-title">Using zeroheight to run zeroheight's design system</div>
+        <div class="card-body">We documented Flapjack inside zeroheight itself — component status, usage guidance, release notes, contribution rules — and made it available to the entire product team. Running our own system through our own product was both a credibility test and a feedback loop that directly informed how we understood and improved the platform.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--ink); margin-top: 48px; margin-bottom: 8px; letter-spacing: -0.01em;">How Flapjack work maps to business value</h3>
+    <p style="font-size: 14px; color: var(--ink-muted); margin-bottom: 0; line-height: 1.6;">Design system investment is often treated as a craft preference rather than a commercial one. Mapping Flapjack work to the 20 Levers made the case for protected time and resourcing concrete.</p>
+
+    <div class="impact-grid">
+      <div class="ig-corner"></div>
+      <div class="ig-header save">Save Money</div>
+      <div class="ig-header make">Make Money</div>
+
+      <div class="ig-row-label">Direct Impact</div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Dev &amp; IT</div>
+            <div class="ig-lever-desc">Shared tokens and components reduce engineering decision overhead and rebuild time at every sprint.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Support &amp; Service</div>
+            <div class="ig-lever-desc">Consistent error patterns and UI clarity reduce avoidable support tickets and user confusion.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Conversion</div>
+            <div class="ig-lever-desc">A polished, coherent UI reduces drop-off during trial and removes friction from onboarding flows.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Retention</div>
+            <div class="ig-lever-desc">Reliable patterns and accessible UI make the product stickier — users who trust the interface stay.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-row-label">Indirect Impact</div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Bugs &amp; Errors</div>
+            <div class="ig-lever-desc">Standardised components with defined states reduce edge cases that create QA and engineering cost.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Training Time</div>
+            <div class="ig-lever-desc">Documented component logic and contribution process reduces time spent onboarding new team members.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Perception</div>
+            <div class="ig-lever-desc">A product that demonstrates its own design system maturity is a stronger sales asset for the platform.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">NPS &amp; Satisfaction</div>
+            <div class="ig-lever-desc">Accessibility improvements and visual quality gains translate directly into user satisfaction scores.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-top: 48px; margin-bottom: 4px; letter-spacing: -0.01em;">Q2 2025 — Design System Objective Breakdown</h3>
+    <p style="font-size: 14px; color: var(--ink-muted); margin-bottom: 0;">Each objective had a named owner and a defined scope within the quarter.</p>
+
+    <table class="obj-table">
+      <thead>
+        <tr>
+          <th>Objective</th>
+          <th>Owner</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Colour token updates across the product</td>
+          <td class="owner">Robert (design) · Rosie (dev)</td>
+          <td><span class="tag-sm">Tokens</span></td>
+        </tr>
+        <tr>
+          <td>Typography token update</td>
+          <td class="owner">Robert</td>
+          <td><span class="tag-sm">Tokens</span></td>
+        </tr>
+        <tr>
+          <td>Iconography style update</td>
+          <td class="owner">Kelsey</td>
+          <td><span class="tag-sm">Components</span></td>
+        </tr>
+        <tr>
+          <td>Modal pattern updates</td>
+          <td class="owner">Aina</td>
+          <td><span class="tag-sm">Patterns</span></td>
+        </tr>
+        <tr>
+          <td>Error UI patterns</td>
+          <td class="owner">Kelsey</td>
+          <td><span class="tag-sm">Patterns</span></td>
+        </tr>
+        <tr>
+          <td>Visual assets within the product</td>
+          <td class="owner">Aina</td>
+          <td><span class="tag-sm">Brand / UI</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CRITIQUE & CULTURE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Culture & Critique</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Making critique useful, and design culture something to invest in</h2>
+    <p class="section-lead">Critique sessions that feel like performance reviews don't produce better work. I wanted to build a team culture where feedback was expected, welcomed, and used.</p>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">Design critique</div>
+        <div class="initiative-body">
+          <div class="initiative-title">More accessible, more structured</div>
+          <div class="initiative-desc">I introduced a more structured critique format — with clear framing, defined feedback types, and a rotating facilitation model that took the pressure off any single person. The aim was to make critique a regular part of the team's rhythm rather than something that only happened when work felt uncertain.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">DIMP days</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Monthly design-improvement themes</div>
+          <div class="initiative-desc">Beyond the per-sprint DIMP allocation, I introduced a monthly theme — a focus area for design-led quality that the whole team worked on together. This might be an accessibility pass on a specific area of the product, a Flapjack update, or a consistency audit. It gave DIMP days a shared direction rather than leaving each designer to define their own scope.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Research</div>
+        <div class="initiative-body">
+          <div class="initiative-title">A research hub the team would actually use</div>
+          <div class="initiative-desc">Research findings were scattered — useful insights existed but were hard to find and rarely built on. I introduced a centralised research hub and pushed for regular user testing as a team practice rather than a project-specific activity, including a structured UserTesting benchmark programme.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Workshops</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Design-led sessions that built cross-functional relationships</div>
+          <div class="initiative-desc">I ran and facilitated workshops including a Figma library pain-points session with engineering, a Flapjack standards survey, and a Business Value of Design session with the team. These were as much about building shared vocabulary and trust as they were about the specific output.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Reflection</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">What I'd tell someone inheriting this kind of role</h2>
+
+    <div class="body-copy">
+      <p>DesignOps work is invisible when it's working well — which makes it easy to underinvest in until something breaks. The brief template, the phase model, the DIMP allocation: none of these felt dramatic when I introduced them, but they removed a consistent source of friction that had been draining the team's energy and credibility.</p>
+      <p>The hardest part of building operational standards isn't designing them — it's creating the conditions where people follow them by choice rather than compliance. That required explaining the why, giving the team ownership of specific areas, and being willing to revise things that weren't working in practice. The contribution system for Flapjack went through several iterations before it stuck.</p>
+      <p>If I had one regret, it's that I didn't move the research infrastructure forward sooner. The intent was always there, but it got deprioritised in favour of more immediate deliverables. By the time I left, we had a solid foundation — but earlier investment would have made the team's case studies significantly stronger.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-name">Richard — Head of Design · zeroheight 2022–2025</div>
+    <div class="footer-doc">Case Study 02 / 02 — DesignOps &amp; Craft</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Richard — Head of Design: Leadership & Strategy — zeroheight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F8F6F0;
+    --bg-card: #F0EBE1;
+    --bg-dark: #1A1A1A;
+    --ink: #1A1A1A;
+    --ink-muted: #6B6B6B;
+    --ink-light: #9B9B9B;
+    --accent: #ff4852;
+    --accent-pale: #F8F6F0;
+    --rule: #D8D1C4;
+    --white: #FFFFFF;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 0 56px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .doc-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .doc-index {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+  }
+
+  .cover-body { padding-top: 80px; }
+
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .eyebrow-text {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 520px;
+    line-height: 1.65;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    padding-top: 64px;
+  }
+
+  .meta-item {}
+  .meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .cover-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .cover-name span {
+    color: var(--ink-muted);
+    font-weight: 400;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .section-tag.accent { background: var(--accent); }
+
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .section-lead {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink-muted);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .stat-cell {
+    background: var(--bg-card);
+    padding: 28px 28px 24px;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .stat-number .accent-num { color: var(--accent); }
+
+  .stat-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* ── BODY COPY ── */
+  .body-copy {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 680px;
+  }
+
+  .body-copy p { margin-bottom: 20px; }
+  .body-copy p:last-child { margin-bottom: 0; }
+
+  /* ── PILLARS GRID ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+    margin-bottom: 40px;
+  }
+
+  .pillar {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 28px 24px;
+    border: 1px solid var(--rule);
+  }
+
+  .pillar-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .pillar-icon svg { width: 18px; height: 18px; }
+
+  .pillar-name {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .pillar-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+
+  /* ── QUOTE / CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border-radius: 0 10px 10px 0;
+    margin: 40px 0;
+  }
+
+  .callout-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  /* ── INITIATIVE LIST ── */
+  .initiative-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  .initiative {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+
+  .initiative:last-child { border-bottom: none; }
+
+  .initiative-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-top: 3px;
+  }
+
+  .initiative-body {}
+
+  .initiative-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .initiative-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+  }
+
+  /* ── OUTCOME CHIPS ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .chip {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 72, 82, 0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  /* ── TWO-COL GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px 24px;
+  }
+
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .footer-doc {
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── IMPACT GRID ── */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 36px 0;
+    font-size: 13px;
+  }
+
+  .ig-corner { background: var(--bg); }
+
+  .ig-header {
+    background: var(--ink);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+    text-align: center;
+  }
+
+  .ig-header.save { background: var(--bg-dark); }
+  .ig-header.make { background: var(--accent); }
+
+  .ig-row-label {
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+
+  .ig-cell {
+    background: var(--bg-card);
+    padding: 16px 18px;
+    vertical-align: top;
+  }
+
+  .ig-cell-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 10px;
+  }
+
+  .ig-lever {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .ig-lever:last-child { margin-bottom: 0; }
+
+  .ig-lever-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .ig-lever-dot.muted { background: var(--rule); }
+
+  .ig-lever-content {}
+  .ig-lever-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .ig-lever-desc {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  /* ── FOUR LAYERS ── */
+  .four-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 36px 0;
+  }
+
+  .layer-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    background: var(--bg-card);
+  }
+
+  .layer-label {
+    padding: 20px 20px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .layer-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .layer-question {
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .layer-content {
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: center;
+  }
+
+  .layer-item {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 4px 12px;
+    border-radius: 100px;
+  }
+
+  .layer-item.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── BEFORE / AFTER SCREENSHOTS ── */
+  .before-after {
+    margin: 36px 0;
+  }
+
+  .ba-label-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .ba-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    text-align: center;
+  }
+
+  .ba-label.before {
+    background: var(--bg-card);
+    color: var(--ink-muted);
+    border: 1px solid var(--rule);
+  }
+
+  .ba-label.after {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .ba-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .screenshot-frame {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: var(--bg-dark);
+  }
+
+  .screenshot-frame img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .screenshot-frame.after-frame {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .screenshot-caption {
+    font-size: 11px;
+    color: var(--ink-light);
+    padding: 10px 12px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 620px) {
+    .ba-label-row, .ba-pair { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { background: white; }
+    .cover { min-height: auto; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .pillars, .two-col, .stat-bar { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 620px) {
+    .page { padding: 0 20px; }
+    .stat-bar { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .initiative { grid-template-columns: 1fr; gap: 8px; }
+    .cover-meta { flex-wrap: wrap; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <span class="doc-label">Case Study — Head of Design</span>
+      <span class="doc-index">01 / 02</span>
+    </div>
+
+    <div class="cover-body">
+      <div class="cover-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">zeroheight · 2022–2025</span>
+      </div>
+      <h1 class="cover-title">Leadership &amp; Strategy</h1>
+      <p class="cover-subtitle">Building a design function that could operate with clarity, connect directly to business outcomes, and raise the standard of design thinking across a product-led SaaS organisation.</p>
+      <div class="cover-meta">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Head of Design</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Team</div>
+          <div class="meta-value">3 Product Designers · 1 Brand Designer</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Focus</div>
+          <div class="meta-value">Strategy · Culture · Brand</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-name">Richard <span>— Product Design Lead</span></div>
+      <div class="doc-label">Leadership &amp; Strategy</div>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Context</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">What I inherited, and what needed to change</h2>
+    <p class="section-lead">zeroheight is a design system platform — a company that sells design maturity to others. That raised the bar for internal design credibility from day one.</p>
+
+    <div class="stat-bar">
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">4</span></div>
+        <div class="stat-desc">designers across product and brand, with varied levels of seniority and no shared operating model</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">0</span></div>
+        <div class="stat-desc">formal design strategy or documented OKRs when I joined — goals were informal and output-focused</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number"><span class="accent-num">Low</span></div>
+        <div class="stat-desc">design visibility across the organisation — work happened in silos, with limited cross-functional presence</div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>The design team had talent but lacked the infrastructure to operate at a senior level: no shared goals, limited connection to company priorities, inconsistent working practices, and a brand that hadn't kept pace with the product's ambition. My role was to build that infrastructure without disrupting the team's momentum or losing what was already working.</p>
+      <p>The challenge wasn't purely internal. As a Head of Design at a company whose core product is about design system maturity, I had to build credibility in both directions — with the product organisation, and with customers who expected the company's own design standards to model what they were buying.</p>
+    </div>
+  </div>
+
+  <!-- STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Design Strategy</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Building a strategy the team could actually use</h2>
+    <p class="section-lead">Design strategy documents that live in Notion and get forgotten aren't strategy. I wanted something the team could reference when prioritising work, and something I could use to advocate for design at a leadership level.</p>
+
+    <div class="callout">
+      <p class="callout-text">"Design's role is not just to deliver features — it's to make the product more consistent, more meaningful, and more compelling. Each of those outcomes has a direct line to business value."</p>
+    </div>
+
+    <div class="body-copy">
+      <p>I developed a design strategy organised around three pillars that connected craft to commercial outcomes. The intention was to give each designer a lens for evaluating their own work — not just whether something was shipped, but whether it moved the needle in a direction that mattered to the business.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="6" height="6" rx="1.5" fill="#ff4852"/>
+            <rect x="10" y="2" width="6" height="6" rx="1.5" fill="#ff4852" opacity="0.4"/>
+            <rect x="2" y="10" width="6" height="6" rx="1.5" fill="#ff4852" opacity="0.4"/>
+            <rect x="10" y="10" width="6" height="6" rx="1.5" fill="#ff4852" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="pillar-name">Pillar 01</div>
+        <div class="pillar-title">Consistency</div>
+        <div class="pillar-desc">Reducing friction and building trust through coherent patterns, tokens, and documented standards across the product and brand.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L11.5 7H16L12.25 10.5L14 16L9 13L4 16L5.75 10.5L2 7H6.5L9 2Z" fill="#ff4852"/>
+          </svg>
+        </div>
+        <div class="pillar-name">Pillar 02</div>
+        <div class="pillar-title">Innovation</div>
+        <div class="pillar-desc">Carving space for design-led thinking that anticipated user needs, explored new interaction patterns, and raised the product's ceiling.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="6" stroke="#ff4852" stroke-width="2"/>
+            <circle cx="9" cy="9" r="2.5" fill="#ff4852"/>
+          </svg>
+        </div>
+        <div class="pillar-name">Pillar 03</div>
+        <div class="pillar-title">Appeal</div>
+        <div class="pillar-desc">Making the product genuinely desirable — visual quality, brand presence, and the kind of considered finish that earns advocacy.</div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>These pillars weren't abstract — I mapped them directly to the company's commercial priorities using the 20 Business Levers framework as a reference model. Each pillar had both direct and indirect lines to revenue, cost, and customer outcomes. Designers could see where their work sat in that map, and use it to sharpen how they talked about impact in cross-functional settings.</p>
+    </div>
+
+    <div class="impact-grid">
+      <div class="ig-corner"></div>
+      <div class="ig-header save">Save Money</div>
+      <div class="ig-header make">Make Money</div>
+
+      <div class="ig-row-label">Direct Impact</div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Support &amp; Service</div>
+            <div class="ig-lever-desc">Clearer UI and consistent patterns reduce user confusion and inbound support load.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Dev &amp; IT</div>
+            <div class="ig-lever-desc">Design system maturity cuts engineering rework and reduces decision overhead at build time.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Sales &amp; Marketing</div>
+            <div class="ig-lever-desc">Brand consistency reduces production cost and time across collateral and campaigns.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Conversion</div>
+            <div class="ig-lever-desc">Removing friction in the signup-to-deal journey directly improves trial-to-paid conversion rate.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Retention</div>
+            <div class="ig-lever-desc">Consistent, high-quality UX reduces churn by making the product indispensable to workflows.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Growth</div>
+            <div class="ig-lever-desc">Design-led expansion features widen the TAM and create upsell pathways for enterprise accounts.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-row-label">Indirect Impact</div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Bugs &amp; Errors</div>
+            <div class="ig-lever-desc">Shared tokens and patterns reduce edge cases and inconsistencies that become support or engineering issues.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Training Time</div>
+            <div class="ig-lever-desc">Well-documented design standards reduce onboarding time for new designers and cross-functional partners.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ig-cell">
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Perception</div>
+            <div class="ig-lever-desc">Brand quality signals credibility to prospective customers evaluating the platform.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">Awareness</div>
+            <div class="ig-lever-desc">A distinctive brand identity makes marketing more effective and builds organic recognition.</div>
+          </div>
+        </div>
+        <div class="ig-lever">
+          <div class="ig-lever-dot muted"></div>
+          <div class="ig-lever-content">
+            <div class="ig-lever-name">NPS &amp; Satisfaction</div>
+            <div class="ig-lever-desc">A product that feels coherent and considered generates stronger advocacy from existing users.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Goal-Setting</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Introducing OKRs and making goals legible to the business</h2>
+    <p class="section-lead">Before I introduced a more structured approach, design goals were largely output-based — ship this feature, update that component. There was no shared language for why the work mattered.</p>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">The problem</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Goals without business connection</div>
+          <div class="initiative-desc">Design objectives weren't framed in terms that leadership or other functions could engage with. This made it harder to advocate for resource, harder to protect design time from reactive work, and harder for the team to feel their work was consequential.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">The approach</div>
+        <div class="initiative-body">
+          <div class="initiative-title">SMART goals structured around the three pillars</div>
+          <div class="initiative-desc">I introduced a quarterly goal-setting cycle using a simplified OKR format — objectives framed around the three strategy pillars, with key results that were specific, measurable and time-bound. Goals were set collaboratively with the team and reviewed regularly rather than filed away.</div>
+          <div class="chips">
+            <span class="chip">Q4 2024 SMART goals</span>
+            <span class="chip">Q2 2025 objectives</span>
+            <span class="chip">2025 strategy alignment</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Example objectives</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Goals that bridged craft and commercial outcome</div>
+          <div class="initiative-desc">Selected objectives included: rolling out the brand update to position design for expansion and deal growth; improving UX research processes to generate conversion insights; accelerating design system execution to support faster, more consistent product delivery. Each was framed with a direct line to the company's stated priorities for that year.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Individual growth</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Personal OKRs for each designer</div>
+          <div class="initiative-desc">I ran individual goal-setting sessions to give each designer their own growth objective within the team's frame. Ownership areas included championing accessibility throughout the product, leading ResearchOps and tooling improvements, and improving our cross-functional product rituals. These weren't add-ons — they were part of how I tracked skill development and team health.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISIBILITY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Visibility</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Raising design's presence across the organisation</h2>
+    <p class="section-lead">A strong design team that operates invisibly isn't a strategic asset. Part of my role was making sure design was present at the right moments — in planning, in cross-functional conversations, and in how the company communicated externally.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-label">Ritual</div>
+        <div class="card-title">Fireside — strategic product forum</div>
+        <div class="card-body">A cross-functional meeting with product managers, designers and leadership. I worked to redirect Fireside from a status update into a genuine forum for strategic product and design discussion — with ownership assigned to one of my designers to take forward.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Advocacy</div>
+        <div class="card-title">Earlier involvement in product strategy</div>
+        <div class="card-body">I actively raised the need for design to be involved before requirements were finalised. This meant attending head-of-product planning sessions, asking pointed questions about squad themes and roadmap framing, and creating the conditions for design to shape — not just respond to — decisions.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Internal enablement</div>
+        <div class="card-title">Teaching designers to speak business</div>
+        <div class="card-body">I ran a Business Value of Design workshop equipping the team with ROI, 20 Levers, and Four Layers frameworks — so designers could translate craft decisions into language that landed in leadership conversations, not just design critiques.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Skills tracking</div>
+        <div class="card-title">Understanding team capability</div>
+        <div class="card-body">I built a working model of the team's current skill distribution — identifying gaps, tracking growth areas, and using that data to inform how work was assigned and where individual development focus should sit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS VALUE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Business Impact</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Giving design a shared language with the business</h2>
+    <p class="section-lead">One of the persistent problems in design teams is the gap between what designers know their work achieves and what they can articulate to leadership. I set out to close that gap — for myself and for the team.</p>
+
+    <div class="body-copy">
+      <p>I introduced three frameworks as shared tools for the team: the 20 Business Levers (mapping impact to direct and indirect commercial outcomes) and the Four Layers of Design Value (Organisational, Product, Customer, Financial). These weren't presented as academic frameworks — they were practical tools for writing better goal statements, justifying design time in planning, and narrating the impact of shipped work in retrospectives and performance conversations.</p>
+    </div>
+
+    <div class="body-copy">
+      <p>The Four Layers framework was particularly useful for the rebrand and for making the case for design system investment. It gave us a structured way to articulate impact at four levels simultaneously — from how the work affected internal team ways of working (Organisational), through to revenue and lifetime value outcomes (Financial).</p>
+    </div>
+
+    <div class="four-layers">
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Financial</div>
+          <div class="layer-question">Are growth and finances trending correctly?</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Revenue</span>
+          <span class="layer-item active">Conversion</span>
+          <span class="layer-item active">LTV</span>
+          <span class="layer-item">Expenses</span>
+          <span class="layer-item active">CAC reduction</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Customer</div>
+          <div class="layer-question">Are we effectively serving users and customers?</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Awareness</span>
+          <span class="layer-item active">Adoption</span>
+          <span class="layer-item active">Retention</span>
+          <span class="layer-item active">Satisfaction</span>
+          <span class="layer-item active">NPS</span>
+          <span class="layer-item">Task success</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Product</div>
+          <div class="layer-question">Are we building the right products efficiently?</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Quality</span>
+          <span class="layer-item active">Consistency</span>
+          <span class="layer-item active">Velocity</span>
+          <span class="layer-item active">Innovation</span>
+          <span class="layer-item">Delivery</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Organisational</div>
+          <div class="layer-question">Are we creating a happy and productive team?</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Collaboration</span>
+          <span class="layer-item active">Process</span>
+          <span class="layer-item active">Alignment</span>
+          <span class="layer-item active">Satisfaction</span>
+          <span class="layer-item active">Hiring</span>
+          <span class="layer-item">Knowledge</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-copy">
+      <p>Items highlighted in red are those the design team's work at zeroheight directly or indirectly moved. Making this explicit — both internally and in how we communicated with leadership — changed the nature of the conversation design could have about its own value.</p>
+    </div>
+  </div>
+
+  <!-- RECRUITMENT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Recruitment</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Hiring to close gaps and raise the ceiling</h2>
+    <p class="section-lead">Team maturity doesn't come only from process — sometimes it requires bringing in the right person. I carried out recruitment to address specific weaknesses I'd identified and to lift the overall standard in areas the team couldn't reach on its own.</p>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">The gap</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Brand quality that wasn't keeping pace</div>
+          <div class="initiative-desc">When I joined, the brand had fallen behind where the product was heading. The visual language felt dated relative to the market, and there wasn't dedicated resource with the craft skills to take it further. I identified this as a structural problem — not something that could be fixed by redistributing work within the existing team.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">The hire</div>
+        <div class="initiative-body">
+          <div class="initiative-title">A dedicated brand designer to own the creative direction</div>
+          <div class="initiative-desc">I built the role brief, ran the hiring process, and brought in a brand designer with the skills to take the visual identity to a more considered and contemporary place. I set an initial creative direction — a clear point of view on where the brand needed to go — and gave them the brief and the space to take it further into a fully fledged rebrand.</div>
+          <div class="chips">
+            <span class="chip">Role scoping</span>
+            <span class="chip">Brief-writing</span>
+            <span class="chip">Creative direction</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">The outcome</div>
+        <div class="initiative-body">
+          <div class="initiative-title">A team that could do what it needed to do</div>
+          <div class="initiative-desc">The hire directly unblocked the rebrand programme. It also changed the capability mix of the team — adding a discipline that had been missing and raising the standard of visual output across everything the team touched. Recruitment here wasn't backfilling attrition; it was a deliberate investment in what the team needed to achieve its objectives.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REBRAND -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Brand</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">Leading the rebrand from strategy to delivery</h2>
+    <p class="section-lead">The rebrand was one of the largest design-led initiatives of my time at zeroheight — and one of the clearest examples of design operating as a strategic function rather than a delivery service.</p>
+
+    <div class="body-copy">
+      <p>The brand had not kept pace with the product's ambition or the company's position in the market. I worked with the brand designer and cross-functional stakeholders — including the head of marketing and head of advocacy — to align on positioning, then led the rollout across internal and external touchpoints.</p>
+      <p>The website rebuild (with an external agency, beginning March 2025 and running approximately 16 weeks) was the most visible output, but the scope extended to all branded materials: presentation decks, newsletters, social assets, Figma Community materials, and the product itself. I defined the governance model — including brand guidelines, training for internal stakeholders, and a product-brand representation framework that set standards for how the visual identity should appear inside the product.</p>
+    </div>
+
+    <div class="before-after">
+      <div class="ba-label-row">
+        <div class="ba-label before">Before</div>
+        <div class="ba-label after">After</div>
+      </div>
+      <div class="ba-pair">
+        <div class="screenshot-frame">
+          <img src="zh-screen-before-1.png" alt="zeroheight website — before rebrand" loading="lazy">
+          <div class="screenshot-caption">Earlier site — playful but visually inconsistent, lacked market positioning</div>
+        </div>
+        <div class="screenshot-frame after-frame">
+          <img src="zh-screen-after-1.png" alt="zeroheight website — after rebrand" loading="lazy">
+          <div class="screenshot-caption">Rebranded site — bold identity, warm palette, strong typographic voice</div>
+        </div>
+      </div>
+      <div class="ba-pair" style="margin-top: 12px;">
+        <div class="screenshot-frame">
+          <img src="zh-screen-before-2.png" alt="zeroheight documentation — before rebrand" loading="lazy">
+          <div class="screenshot-caption">Earlier product page — generic illustration style, no distinctive brand language</div>
+        </div>
+        <div class="screenshot-frame after-frame">
+          <img src="zh-screen-after-2.png" alt="zeroheight System Stack blog — after rebrand" loading="lazy">
+          <div class="screenshot-caption">Post-rebrand content hub — distinctive illustration style, consistent brand language</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p class="callout-text">"The rebrand wasn't a cosmetic exercise. It was about making the company's design credibility visible to the customers we were asking to trust us with their design systems."</p>
+    </div>
+
+    <div class="initiative-list">
+      <div class="initiative">
+        <div class="initiative-label">Scope</div>
+        <div class="initiative-body">
+          <div class="initiative-desc">Website, product UI, social, decks, newsletters, Figma Community, merchandise, avatars — a full audit of brand touchpoints with defined ownership and delivery timelines.</div>
+          <div class="chips">
+            <span class="chip">External agency coordination</span>
+            <span class="chip">16-week build</span>
+            <span class="chip">Cross-functional rollout</span>
+          </div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Governance</div>
+        <div class="initiative-body">
+          <div class="initiative-desc">Published brand guidelines, a product-brand representation framework defining where branded language and visual assets should appear in the UI, and internal training to enable consistent application without bottlenecking through design.</div>
+        </div>
+      </div>
+      <div class="initiative">
+        <div class="initiative-label">Business impact</div>
+        <div class="initiative-body">
+          <div class="initiative-title">Impact across all four layers of value</div>
+          <div class="initiative-desc">Mapping the rebrand through the Four Layers of Design Value made the business case explicit — moving it from a creative project into a strategic investment.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="four-layers">
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Financial</div>
+          <div class="layer-question">Revenue and deal growth</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Deal growth</span>
+          <span class="layer-item active">Enterprise positioning</span>
+          <span class="layer-item active">CAC reduction</span>
+          <span class="layer-item active">Expansion revenue</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Customer</div>
+          <div class="layer-question">Trust, perception, advocacy</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Brand perception</span>
+          <span class="layer-item active">Awareness</span>
+          <span class="layer-item active">NPS &amp; advocacy</span>
+          <span class="layer-item active">Trial adoption</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Product</div>
+          <div class="layer-question">Consistency inside the UI</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Brand in-product coherence</span>
+          <span class="layer-item active">Visual quality</span>
+          <span class="layer-item active">Design system alignment</span>
+        </div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-label">
+          <div class="layer-name">Organisational</div>
+          <div class="layer-question">Internal capability and alignment</div>
+        </div>
+        <div class="layer-content">
+          <span class="layer-item active">Brand designer hire</span>
+          <span class="layer-item active">Cross-functional alignment</span>
+          <span class="layer-item active">Internal training</span>
+          <span class="layer-item active">Governance published</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag accent">Reflection</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <h2 class="section-title">What I learned about leading design at a design-system company</h2>
+
+    <div class="body-copy">
+      <p>The context made standard leadership challenges harder. Every decision I made about the team's process, tooling, or output quality was also a statement about what we believed good design practice looked like — and our customers were watching. That pressure was useful: it forced a higher standard of rigour and made me think carefully about what I was willing to put our name on.</p>
+      <p>The thing I'd do differently is move faster on connecting design goals to business language. The frameworks existed, but I spent too long building internal confidence before taking them into cross-functional settings. The team had more to offer to the commercial conversation than they initially knew — and the sooner you give people that vocabulary, the more clearly they can advocate for their own work.</p>
+      <p>The handover I built before leaving — with assigned owners, documented rituals, and clear operational expectations — reflected what I wished had been in place from the start: a design function that could sustain its own standards without needing me in every room.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-name">Richard — Head of Design · zeroheight 2022–2025</div>
+    <div class="footer-doc">Case Study 01 / 02 — Leadership &amp; Strategy</div>
+  </div>
+
+</div>
+</body>
+</html>
